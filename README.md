@@ -27,6 +27,47 @@ or, with Go:
 go install github.com/togo-framework/cabrain-cli@latest   # installs `cabrain`
 ```
 
+or, with npm:
+
+```sh
+npm i -g cabrain-cli
+```
+
+**Upgrade** to the latest anytime (npm / go / binary aware):
+
+```sh
+curl -fsSL https://cabrain.fadymondy.com/upgrade.sh | sh
+```
+
+## Use it as a Claude Code plugin
+
+This repo is **also a Claude Code plugin** — it bundles the CaBrain MCP, memory-first
+slash commands, two agents, and a skill. Install:
+
+```
+/plugin marketplace add togo-framework/cabrain-cli
+/plugin install cabrain@cabrain
+```
+
+At enable time it prompts for your **CaBrain token** (and optional endpoint / default
+brain) and wires the MCP automatically — no `.mcp.json` editing. Requires the `cabrain`
+binary on PATH (any install method above), since the plugin's MCP server *is* `cabrain mcp`.
+
+**What the plugin adds**
+
+| kind | name | what it does |
+|---|---|---|
+| command | `/cabrain:recall [brain] <query>` | hybrid recall, answer from memory |
+| command | `/cabrain:retain [brain] <content>` | store a memory |
+| command | `/cabrain:brains [name]` | list brains / brain details |
+| command | `/cabrain:new-brain <name>` | create a new brain |
+| command | `/cabrain:connect [client]` | wire the MCP into another client |
+| command | `/cabrain:status` | endpoint + reachable brains |
+| command | `/cabrain:doctor` | diagnose CLI / auth / MCP |
+| agent | `cabrain-curator` | memory-first Q&A + retention (recall→answer→retain) |
+| agent | `cabrain-connector` | onboarding: install, tokens, brains, datasources |
+| skill | `memory-first` | the recall→answer/act→retain discipline |
+
 One-liner that installs, logs in, and wires a client in a single shot:
 
 ```sh
