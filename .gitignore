@@ -1,3 +1,7 @@
 /cabrain
 /dist/
 *.exe
+bin/cabrain-bin
+bin/cabrain.exe
+bin/*.download
+node_modules/

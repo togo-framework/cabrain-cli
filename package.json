@@ -1,0 +1,50 @@
+{
+  "name": "cabrain-cli",
+  "version": "0.1.0",
+  "description": "Connect any AI client (Claude Desktop/Code, Codex, Gemini, Cursor) to the CaBrain memory system — one binary that is both the MCP server and its installer.",
+  "bin": {
+    "cabrain": "bin/cabrain.js"
+  },
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js"
+  },
+  "files": [
+    "bin/cabrain.js",
+    "scripts/postinstall.js",
+    "README.md",
+    "LICENSE"
+  ],
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "cabrain",
+    "memory",
+    "claude",
+    "claude-desktop",
+    "claude-code",
+    "ai",
+    "llm"
+  ],
+  "homepage": "https://cabrain.fadymondy.com",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/togo-framework/cabrain-cli.git"
+  },
+  "bugs": {
+    "url": "https://github.com/togo-framework/cabrain-cli/issues"
+  },
+  "license": "MIT",
+  "author": "togo-framework",
+  "engines": {
+    "node": ">=16"
+  },
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "cpu": [
+    "x64",
+    "arm64"
+  ]
+}
