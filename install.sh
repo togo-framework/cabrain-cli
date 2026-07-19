@@ -38,9 +38,9 @@ case "$arch" in
 esac
 ext=""; [ "$os" = "windows" ] || [ "${OS:-}" = "Windows_NT" ] && ext=".exe" || true
 
-# --- 1) try a prebuilt binary from the site ----------------------------------
+# --- 1) try a prebuilt binary from the GitHub release ------------------------
 download() {
-  url="$SITE/dl/cabrain-${os}-${arch}${ext}"
+  url="https://github.com/togo-framework/cabrain-cli/releases/latest/download/cabrain-${os}-${arch}${ext}"
   say "downloading $url"
   if command -v curl >/dev/null 2>&1; then
     curl -fsSL "$url" -o "$BIN_DIR/cabrain${ext}" 2>/dev/null || return 1
