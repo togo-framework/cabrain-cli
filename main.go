@@ -203,6 +203,10 @@ func main() {
 	case "token", "tokens":
 		err = cmdToken(rest)
 
+	// --- plugin hooks (read hook JSON on stdin, emit injected context) ---
+	case "hook":
+		err = cmdHook(rest)
+
 	case "version", "--version", "-v":
 		fmt.Printf("cabrain %s\n", version)
 	case "help", "-h", "--help":

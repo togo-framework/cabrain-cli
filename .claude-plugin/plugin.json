@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "cabrain",
   "displayName": "CaBrain \u2014 agent memory organ",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Give Claude Code a persistent, hybrid-recall memory brain. Bundles the CaBrain MCP (recall/retain + brains + datasources), memory-first slash commands, a curator agent, and an onboarding connector. Powered by the `cabrain` CLI.",
   "author": {
     "name": "togo-framework",
@@ -39,6 +39,18 @@
       "type": "string",
       "title": "Default brain (optional)",
       "description": "Bind this session to one brain so tools default to it (e.g. think-os). Leave blank to pass namespace per call."
+    },
+    "auto_recall": {
+      "type": "boolean",
+      "title": "Auto-recall on every prompt",
+      "description": "When on, each prompt is used to auto-recall relevant memories from the default brain and inject them as context (pull). Needs a default brain + a saved token.",
+      "default": false
+    },
+    "inject_rules": {
+      "type": "boolean",
+      "title": "Inject memory-first rules at session start",
+      "description": "Inject the recall\u2192answer\u2192retain discipline into every session (default on).",
+      "default": true
     }
   },
   "mcpServers": {
@@ -53,5 +65,6 @@
         "CABRAIN_DEFAULT_NAMESPACE": "${user_config.default_namespace}"
       }
     }
-  }
+  },
+  "hooks": "./hooks/hooks.json"
 }

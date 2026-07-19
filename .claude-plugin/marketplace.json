@@ -6,7 +6,7 @@
   },
   "metadata": {
     "description": "CaBrain \u2014 a persistent memory organ for AI agents, as a Claude Code plugin.",
-    "version": "0.1.1"
+    "version": "0.1.2"
   },
   "plugins": [
     {

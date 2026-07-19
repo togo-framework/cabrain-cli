@@ -67,6 +67,39 @@ binary on PATH (any install method above), since the plugin's MCP server *is* `c
 | agent | `cabrain-curator` | memory-first Q&A + retention (recall→answer→retain) |
 | agent | `cabrain-connector` | onboarding: install, tokens, brains, datasources |
 | skill | `memory-first` | the recall→answer/act→retain discipline |
+| hook | `SessionStart` | auto-injects the memory-first rules into every session |
+| hook | `UserPromptSubmit` | opt-in auto-recall — pulls relevant memories for each prompt |
+
+### Hooks — auto push/pull
+
+The plugin ships two hooks (backed by `cabrain hook …`, so no `jq`/`python` needed — the
+binary parses the hook JSON itself, and every hook **fails open**: any error → no output,
+never blocks you):
+
+- **Memory-first rules (SessionStart)** — injects the recall→answer→retain discipline at
+  the start of every session, so the model reaches for the brain automatically. **On by
+  default;** turn off with the `inject_rules` plugin option or `CABRAIN_HOOK_RULES=0`.
+- **Auto-recall / pull (UserPromptSubmit)** — uses each prompt to recall the top matching
+  memories from your default brain and injects them as context. **Opt-in** (it hits the
+  brain every prompt): enable the `auto_recall` plugin option or `CABRAIN_HOOK_AUTORECALL=1`,
+  and set a default brain (`CABRAIN_AUTORECALL_BRAIN`, `CABRAIN_DEFAULT_NAMESPACE`, or the
+  plugin's default-brain option). Needs a saved token (`cabrain auth login`) or the plugin's
+  `api_token`.
+
+**Push** (writing to the brain) stays model-driven on purpose — retention should be
+selective and distilled, not a firehose. The injected rules tell the model to `memory_retain`
+what's durable; `/cabrain:retain` and the `cabrain-curator` agent do it explicitly.
+
+Standalone (outside the plugin) you can wire the same hooks in your own `settings.json`:
+
+```json
+{
+  "hooks": {
+    "SessionStart":     [{ "hooks": [{ "type": "command", "command": "cabrain hook rules" }] }],
+    "UserPromptSubmit": [{ "hooks": [{ "type": "command", "command": "cabrain hook recall" }] }]
+  }
+}
+```
 
 One-liner that installs, logs in, and wires a client in a single shot:
 
