@@ -1,0 +1,27 @@
+{
+  "name": "cabrain",
+  "owner": {
+    "name": "togo-framework",
+    "url": "https://cabrain.fadymondy.com"
+  },
+  "metadata": {
+    "description": "CaBrain \u2014 a persistent memory organ for AI agents, as a Claude Code plugin.",
+    "version": "0.1.1"
+  },
+  "plugins": [
+    {
+      "name": "cabrain",
+      "source": "./",
+      "description": "Persistent hybrid-recall memory for Claude Code: the CaBrain MCP + memory-first commands, a curator agent, and an onboarding connector. Requires the `cabrain` CLI (npm i -g cabrain-cli).",
+      "category": "memory",
+      "keywords": [
+        "memory",
+        "mcp",
+        "recall",
+        "knowledge",
+        "rag",
+        "brain"
+      ]
+    }
+  ]
+}

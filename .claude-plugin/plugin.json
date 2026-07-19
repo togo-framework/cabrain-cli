@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "cabrain",
+  "displayName": "CaBrain \u2014 agent memory organ",
+  "version": "0.1.1",
+  "description": "Give Claude Code a persistent, hybrid-recall memory brain. Bundles the CaBrain MCP (recall/retain + brains + datasources), memory-first slash commands, a curator agent, and an onboarding connector. Powered by the `cabrain` CLI.",
+  "author": {
+    "name": "togo-framework",
+    "url": "https://cabrain.fadymondy.com"
+  },
+  "homepage": "https://cabrain.fadymondy.com",
+  "repository": "https://github.com/togo-framework/cabrain-cli",
+  "license": "MIT",
+  "keywords": [
+    "memory",
+    "mcp",
+    "cabrain",
+    "recall",
+    "rag",
+    "knowledge",
+    "brain",
+    "ai-native"
+  ],
+  "userConfig": {
+    "api_url": {
+      "type": "string",
+      "title": "CaBrain API URL",
+      "description": "Base URL of the CaBrain server (default https://cabrain.fadymondy.com).",
+      "default": "https://cabrain.fadymondy.com"
+    },
+    "api_token": {
+      "type": "string",
+      "title": "CaBrain token (cbt_\u2026)",
+      "description": "Your access token. Mint one with `cabrain auth token new <name>` or ask a brain admin.",
+      "sensitive": true,
+      "required": true
+    },
+    "default_namespace": {
+      "type": "string",
+      "title": "Default brain (optional)",
+      "description": "Bind this session to one brain so tools default to it (e.g. think-os). Leave blank to pass namespace per call."
+    }
+  },
+  "mcpServers": {
+    "cabrain": {
+      "command": "cabrain",
+      "args": [
+        "mcp"
+      ],
+      "env": {
+        "CABRAIN_API_URL": "${user_config.api_url}",
+        "CABRAIN_TOKEN": "${user_config.api_token}",
+        "CABRAIN_DEFAULT_NAMESPACE": "${user_config.default_namespace}"
+      }
+    }
+  }
+}

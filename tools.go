@@ -5,6 +5,12 @@ package main
 type prop map[string]any
 
 func obj(required []string, props map[string]any) map[string]any {
+	// JSON Schema requires `required` to be an array — never null. Tools with no
+	// required fields must emit [], or strict MCP clients (Claude Code's Zod
+	// validator) reject the whole tools/list with "expected array, received null".
+	if required == nil {
+		required = []string{}
+	}
 	return map[string]any{"type": "object", "properties": props, "required": required}
 }
 

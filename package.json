@@ -1,6 +1,6 @@
 {
   "name": "cabrain-cli",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Connect any AI client (Claude Desktop/Code, Codex, Gemini, Cursor) to the CaBrain memory system — one binary that is both the MCP server and its installer.",
   "bin": {
     "cabrain": "bin/cabrain.js"
